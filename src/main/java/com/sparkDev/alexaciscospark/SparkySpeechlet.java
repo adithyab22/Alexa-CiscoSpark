@@ -25,10 +25,8 @@ import com.amazon.speech.speechlet.SpeechletResponse;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SimpleCard;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.sparkDev.alexaciscospark.api.Team;
+import com.sparkDev.alexaciscospark.api.Teams;
 import java.util.logging.Level;
 
 /**
@@ -127,12 +125,12 @@ public class SparkySpeechlet implements Speechlet {
     }
     
      private SpeechletResponse createTeam(Intent intent, Session session)  {
-        String speechText = "Create Team";
+        String speechText = "Create Teams";
         Slot teamNameSlot = intent.getSlot("TeamName");
 
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
-        card.setTitle("Create Team");
+        card.setTitle("Create Teams");
         card.setContent(speechText);
 
         // Create the plain text output.
@@ -140,7 +138,7 @@ public class SparkySpeechlet implements Speechlet {
         String response = "";
          if (teamNameSlot != null && teamNameSlot.getValue() != null) {
             try {
-                response = Team.createTeam(teamNameSlot.getValue(), session.getUser().getAccessToken());
+                response = Teams.createTeam(teamNameSlot.getValue(), session.getUser().getAccessToken());
             } catch (UnirestException ex) {
                 java.util.logging.Logger.getLogger(SparkySpeechlet.class.getName()).log(Level.SEVERE, null, ex);
             }
