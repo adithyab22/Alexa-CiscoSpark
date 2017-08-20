@@ -6,8 +6,13 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Memberships {
+    
+     private static final Logger log = LoggerFactory.getLogger(Memberships.class);
+     
     public static String addMemberToRoom(String name, String roomName, String sessionToken) throws UnirestException {
         HttpResponse<JsonNode> roomsResponse = Unirest.get("https://api.ciscospark.com/v1/rooms")
                 .header("authorization", "Bearer " + sessionToken)
@@ -42,6 +47,8 @@ public class Memberships {
         String personEmail = null;
         for (int i = 0; i < memberItems.length(); i++) {
             JSONObject item = memberItems.getJSONObject(i);
+            log.info("DISPLAY NAME: "+item.getString("personDisplayName").toLowerCase() );
+            log.info("NAME: "+name.toLowerCase() );
             if (item.getString("personDisplayName").toLowerCase().equals(name.toLowerCase()) ){
                 personId = item.getString("personId");
                 personEmail = item.getString("personEmail");
@@ -199,6 +206,15 @@ public class Memberships {
             return "Member successfully added.";
         } else {
             return "Member cannot be created.";
+        }
+    }
+    
+    private String getTeamNameFromIntent(final Intent intent) throws Exception {
+        Slot teamSlot = intent.getSlot("TeamName");
+        if (teamSlot == null || teamSlot.getValue() == null) {
+            throw new Exception("");
+        } else {
+            return teamSlot.getValue();
         }
     }
 }

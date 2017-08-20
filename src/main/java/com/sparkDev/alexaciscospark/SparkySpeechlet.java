@@ -228,6 +228,22 @@ public class SparkySpeechlet implements Speechlet {
                 }
 
             }
+            else if (previousIntent != null && previousIntent.equals("addMemberToTeamIntent")) {
+                log.info("Handling message to team request..");
+                inputText = getInputTextFromIntent(intent); //team name
+                String memberName = (String) session.getAttribute("MEMBER_NAME");
+                log.info("MEMBER NAME: "+ memberName);
+                try {
+                    //if my previous intent was a message to room intent
+                    if(memberName != null){
+                        result = Memberships.addMemberToTeam(memberName, inputText, session.getUser().getAccessToken());
+                    }
+                    
+                } catch (UnirestException ex) {
+                    java.util.logging.Logger.getLogger(SparkySpeechlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
         } catch (Exception e) {
             String speechOutput
                     = "Sorry, I did not get it.";

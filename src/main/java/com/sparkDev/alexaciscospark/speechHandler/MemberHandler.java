@@ -16,7 +16,9 @@ import com.amazon.speech.ui.SimpleCard;
 import com.amazon.speech.ui.SsmlOutputSpeech;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.sparkDev.alexaciscospark.SparkySpeechlet;
+import com.sparkDev.alexaciscospark.api.Memberships;
 import com.sparkDev.alexaciscospark.api.Rooms;
+import com.sparkDev.alexaciscospark.api.Teams;
 import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +44,7 @@ public class MemberHandler {
             String repromptText = "Sorry, I did not get you. What is the room name?";
             // repromptText is the speechOutput
             session.setAttribute("PREVIOUS_INTENT", intent.getName());
+            session.setAttribute("MEMBER_NAME",memberName );
             // repromptText is the same as the speechOutput
             return newAskResponse(speechOutput, repromptText);
         }
@@ -56,7 +59,49 @@ public class MemberHandler {
         String response = "";
         if (memberName != null) {
             try {
-                response = Rooms.createRoom(memberName, session.getUser().getAccessToken());
+                response = Memberships.addMemberToRoom(memberName, roomTitle, session.getUser().getAccessToken());
+            } catch (UnirestException ex) {
+                java.util.logging.Logger.getLogger(SparkySpeechlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        speech.setText(response);
+
+        return SpeechletResponse.newTellResponse(speech, card);
+    }
+    
+    
+     public static SpeechletResponse addMemberToTeam(final Intent intent, final Session session) {
+        String speechText = "Create Member";
+        String memberName = "";
+        String teamName = "";
+        //if the question does not have a room in it, ask back - What is the room name
+        try {
+            memberName = getMemberFromIntent(intent);
+            teamName = getTeamNameFromIntent(intent);
+        } catch (Exception e) {
+            // invalid room. move to the dialog
+            String speechOutput
+                    = "Which team would you like to add to?";
+            String repromptText = "Sorry, I did not get you. Which team would you like to add to?";
+            // repromptText is the speechOutput
+            session.setAttribute("PREVIOUS_INTENT", intent.getName());
+            session.setAttribute("MEMBER_NAME",memberName );
+            // repromptText is the same as the speechOutput
+            return newAskResponse(speechOutput, repromptText);
+        }
+
+        // Create the Simple card content.
+        SimpleCard card = new SimpleCard();
+        card.setTitle("Spark Alexa");
+        card.setContent(speechText);
+
+        // Create the plain text output.
+        PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
+        String response = "";
+        if (memberName != null) {
+            try {
+                response = Memberships.addMemberToTeam(memberName, teamName, session.getUser().getAccessToken());
             } catch (UnirestException ex) {
                 java.util.logging.Logger.getLogger(SparkySpeechlet.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -131,6 +176,15 @@ public class MemberHandler {
             throw new Exception("");
         } else {
             return roomTitle.getValue();
+        }
+    }
+    
+    private static String getTeamNameFromIntent(final Intent intent) throws Exception {
+        Slot teamSlot = intent.getSlot("TeamName");
+        if (teamSlot == null || teamSlot.getValue() == null) {
+            throw new Exception("");
+        } else {
+            return teamSlot.getValue();
         }
     }
 }
