@@ -7,7 +7,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Room {
+public class Rooms {
     //POST http request to create an independent room on Cisco Spark
     public static String createRoom(String name, String sessionToken) throws UnirestException {
         HttpResponse<JsonNode> response = Unirest.post("https://api.ciscospark.com/v1/rooms")
@@ -18,9 +18,9 @@ public class Room {
                 .body("{\n    \"title\": \"" + name + "\"\n}")
                 .asJson();
         if (response.getStatus() == 200) {
-            return "Room successfully created.";
+            return "Rooms successfully created.";
         } else {
-            return "Room cannot be created.";
+            return "Rooms cannot be created.";
         }
     }
 
@@ -44,7 +44,7 @@ public class Room {
         }
 
         if (teamId == null) {
-            return "Team not found.";
+            return "Teams not found.";
         }
 
         HttpResponse<JsonNode> response = Unirest.post("https://api.ciscospark.com/v1/rooms")
@@ -55,9 +55,9 @@ public class Room {
                 .body("{\r\n  \"title\" : \"" + title + "\",\r\n  \"teamId\" : \"" + teamId + "\"\r\n}")
                 .asJson();
         if (response.getStatus() == 200) {
-            return "Room successfully created.";
+            return "Rooms successfully created.";
         } else {
-            return "Room cannot be created.";
+            return "Rooms cannot be created.";
         }
     }
 
@@ -81,7 +81,7 @@ public class Room {
         }
 
         if (roomId == null) {
-            return "Room not found.";
+            return "Rooms not found.";
         }
 
         HttpResponse<JsonNode> response = Unirest.delete("https://api.ciscospark.com/v1/rooms/" + roomId)
@@ -92,9 +92,9 @@ public class Room {
                 .asJson();
 
         if (response.getStatus() == 204) {
-            return "Room successfully deleted.";
+            return "Rooms successfully deleted.";
         } else {
-            return "Room cannot be deleted.";
+            return "Rooms cannot be deleted.";
         }
     }
 }

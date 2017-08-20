@@ -7,7 +7,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Team {
+public class Teams {
     //POST http request to create a team on Cisco Spark
     public static String createTeam(String name, String sessionToken) throws UnirestException {
         HttpResponse<JsonNode> response = Unirest.post("https://api.ciscospark.com/v1/teams")
@@ -18,9 +18,9 @@ public class Team {
                 .body("{\n    \"name\": \"" + name + "\"\n}")
                 .asJson();
         if (response.getStatus() == 200) {
-            return "Team successfully created.";
+            return "Teams successfully created.";
         } else {
-            return "Team cannot be created.";
+            return "Teams cannot be created.";
         }
     }
 
@@ -45,7 +45,7 @@ public class Team {
         }
 
         if (teamId == null) {
-            return "Team not found.";
+            return "Teams not found.";
         }
 
         HttpResponse<JsonNode> response = Unirest.delete("https://api.ciscospark.com/v1/teams/" + teamId)
@@ -56,9 +56,9 @@ public class Team {
                 .asJson();
 
         if (response.getStatus() == 204) {
-            return "Team successfully deleted.";
+            return "Teams successfully deleted.";
         } else {
-            return "Team cannot be deleted.";
+            return "Teams cannot be deleted.";
         }
     }
 }

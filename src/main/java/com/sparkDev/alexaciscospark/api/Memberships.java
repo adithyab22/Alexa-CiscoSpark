@@ -7,7 +7,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Membership {
+public class Memberships {
     public static String addMemberToRoom(String name, String roomName, String sessionToken) throws UnirestException {
         HttpResponse<JsonNode> roomsResponse = Unirest.get("https://api.ciscospark.com/v1/rooms")
                 .header("authorization", "Bearer " + sessionToken)
@@ -27,7 +27,7 @@ public class Membership {
         }
 
         if (roomId == null) {
-            return "Room not found.";
+            return "Rooms not found.";
         }
 
         HttpResponse<JsonNode> membersResponse = Unirest.get("https://api.ciscospark.com/v1/memberships")
@@ -87,7 +87,7 @@ public class Membership {
         }
 
         if (teamId == null) {
-            return "Team not found.";
+            return "Teams not found.";
         }
 
         HttpResponse<JsonNode> membersResponse = Unirest.get("https://api.ciscospark.com/v1/memberships")
@@ -147,7 +147,7 @@ public class Membership {
         }
 
         if (roomId == null) {
-            return "Room not found.";
+            return "Rooms not found.";
         }
 
         HttpResponse<JsonNode> response = Unirest.post("https://api.ciscospark.com/v1/memberships")
@@ -184,7 +184,7 @@ public class Membership {
         }
 
         if (teamId == null) {
-            return "Team not found.";
+            return "Teams not found.";
         }
 
         HttpResponse<JsonNode> response = Unirest.post("https://api.ciscospark.com/v1/team/memberships")
