@@ -25,9 +25,9 @@ import com.amazon.speech.speechlet.SpeechletResponse;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SimpleCard;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.sparkDev.alexaciscospark.api.Membership;
+import com.sparkDev.alexaciscospark.api.Room;
 import com.sparkDev.alexaciscospark.api.Team;
 import java.util.logging.Level;
 
@@ -62,11 +62,13 @@ public class SparkySpeechlet implements Speechlet {
         Intent intent = request.getIntent();
         String intentName = (intent != null) ? intent.getName() : null;
 
-        if ("HelloWorldIntent".equals(intentName)) {
-            return getHelloResponse();
-        } else if("createTeamIntent".equals(intentName)){
+        if("createTeamIntent".equals(intentName)){
             return createTeam(intent, session);
-        } 
+        } else if("createRoomIntent".equals(intentName)){
+            return createRoom(intent, session);
+        }else if("addMemberToTeamIntent".equals(intentName)){
+            return addMemberToTeam(intent, session);
+        }
         else if ("AMAZON.HelpIntent".equals(intentName)) {
             return getHelpResponse();
         }else {
@@ -79,7 +81,6 @@ public class SparkySpeechlet implements Speechlet {
             throws SpeechletException {
         log.info("onSessionEnded requestId={}, sessionId={}", request.getRequestId(),
                 session.getSessionId());
-        // any cleanup logic goes here
     }
 
     /**
@@ -88,11 +89,11 @@ public class SparkySpeechlet implements Speechlet {
      * @return SpeechletResponse spoken and visual response for the given intent
      */
     private SpeechletResponse getWelcomeResponse() {
-        String speechText = "Welcome to the Alexa Skills Kit, you can say hello";
+        String speechText = "";
 
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
-        card.setTitle("HelloWorld");
+        card.setTitle("Cisco Spark");
         card.setContent(speechText);
 
         // Create the plain text output.
@@ -104,26 +105,6 @@ public class SparkySpeechlet implements Speechlet {
         reprompt.setOutputSpeech(speech);
 
         return SpeechletResponse.newAskResponse(speech, reprompt, card);
-    }
-
-    /**
-     * Creates a {@code SpeechletResponse} for the hello intent.
-     *
-     * @return SpeechletResponse spoken and visual response for the given intent
-     */
-    private SpeechletResponse getHelloResponse() {
-        String speechText = "Hello world";
-
-        // Create the Simple card content.
-        SimpleCard card = new SimpleCard();
-        card.setTitle("HelloWorld");
-        card.setContent(speechText);
-
-        // Create the plain text output.
-        PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
-        speech.setText(speechText);
-
-        return SpeechletResponse.newTellResponse(speech, card);
     }
     
      private SpeechletResponse createTeam(Intent intent, Session session)  {
@@ -161,7 +142,7 @@ public class SparkySpeechlet implements Speechlet {
 
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
-        card.setTitle("HelloWorld");
+        card.setTitle("Cisco Spark");
         card.setContent(speechText);
 
         // Create the plain text output.
@@ -173,5 +154,56 @@ public class SparkySpeechlet implements Speechlet {
         reprompt.setOutputSpeech(speech);
 
         return SpeechletResponse.newAskResponse(speech, reprompt, card);
+    }
+
+    private SpeechletResponse createRoom(Intent intent, Session session) {
+        String speechText = "Cisco Spark";
+        Slot roomTitle = intent.getSlot("RoomTitle");
+
+        // Create the Simple card content.
+        SimpleCard card = new SimpleCard();
+        card.setTitle(speechText);
+        card.setContent(speechText);
+
+        // Create the plain text output.
+        PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
+        String response = "";
+         if (roomTitle != null && roomTitle.getValue() != null) {
+            try {
+                response = Room.createRoom(roomTitle.getValue(), session.getUser().getAccessToken());
+            } catch (UnirestException ex) {
+                java.util.logging.Logger.getLogger(SparkySpeechlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             
+         }
+            speech.setText(response);
+
+        return SpeechletResponse.newTellResponse(speech, card);
+    }
+
+    private SpeechletResponse addMemberToTeam(Intent intent, Session session) {
+        String speechText = "Cisco Spark";
+        Slot teamName = intent.getSlot("TeamName");
+        Slot member = intent.getSlot("memberName");
+
+        // Create the Simple card content.
+        SimpleCard card = new SimpleCard();
+        card.setTitle(speechText);
+        card.setContent(speechText);
+
+        // Create the plain text output.
+        PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
+        String response = "";
+         if (teamName != null && teamName.getValue() != null) {
+            try {
+                response = Membership.addMemberToTeam(member.getValue(), teamName.getValue(), session.getUser().getAccessToken());
+            } catch (UnirestException ex) {
+                java.util.logging.Logger.getLogger(SparkySpeechlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             
+         }
+            speech.setText(response);
+
+        return SpeechletResponse.newTellResponse(speech, card);
     }
 }
