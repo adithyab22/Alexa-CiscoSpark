@@ -37,7 +37,7 @@ public class Rooms {
         String teamId = null;
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);
-            if (item.getString("name").toLowerCase() == teamName.toLowerCase()) {
+            if (item.getString("name").toLowerCase().equals(teamName.toLowerCase())) {
                 teamId = item.getString("id");
                 break;
             }
@@ -74,7 +74,7 @@ public class Rooms {
         String roomId = null;
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);
-            if (item.getString("title").toLowerCase() == roomName.toLowerCase()) {
+            if (item.getString("title").toLowerCase().equals(roomName.toLowerCase()) ){
                 roomId = item.getString("id");
                 break;
             }

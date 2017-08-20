@@ -38,7 +38,7 @@ public class Teams {
         String teamId = null;
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);
-            if (item.getString("name").toLowerCase() == teamName.toLowerCase()) {
+            if (item.getString("name").toLowerCase().equals(teamName.toLowerCase()) ){
                 teamId = item.getString("id");
                 break;
             }

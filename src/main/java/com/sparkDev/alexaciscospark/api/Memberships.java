@@ -20,7 +20,7 @@ public class Memberships {
         String roomId = null;
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);
-            if (item.getString("title").toLowerCase() == roomName.toLowerCase()) {
+            if (item.getString("title").toLowerCase().equals(roomName.toLowerCase()) ){
                 roomId = item.getString("id");
                 break;
             }
@@ -42,7 +42,7 @@ public class Memberships {
         String personEmail = null;
         for (int i = 0; i < memberItems.length(); i++) {
             JSONObject item = memberItems.getJSONObject(i);
-            if (item.getString("personDisplayName").toLowerCase() == name.toLowerCase()) {
+            if (item.getString("personDisplayName").toLowerCase().equals(name.toLowerCase()) ){
                 personId = item.getString("personId");
                 personEmail = item.getString("personEmail");
                 break;
@@ -80,7 +80,7 @@ public class Memberships {
         String teamId = null;
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);
-            if (item.getString("name").toLowerCase() == teamName.toLowerCase()) {
+            if (item.getString("name").toLowerCase().equals(teamName.toLowerCase()) ){
                 teamId = item.getString("id");
                 break;
             }
@@ -102,7 +102,7 @@ public class Memberships {
         String personEmail = null;
         for (int i = 0; i < memberItems.length(); i++) {
             JSONObject item = memberItems.getJSONObject(i);
-            if (item.getString("personDisplayName").toLowerCase() == name.toLowerCase()) {
+            if (item.getString("personDisplayName").toLowerCase().equals(name.toLowerCase()) ){
                 personId = item.getString("personId");
                 personEmail = item.getString("personEmail");
                 break;
@@ -140,7 +140,7 @@ public class Memberships {
         String roomId = null;
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);
-            if (item.getString("title").toLowerCase() == roomName.toLowerCase()) {
+            if (item.getString("title").toLowerCase().equals(roomName.toLowerCase()) ){
                 roomId = item.getString("id");
                 break;
             }
@@ -177,7 +177,7 @@ public class Memberships {
         String teamId = null;
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);
-            if (item.getString("name").toLowerCase() == teamName.toLowerCase()) {
+            if (item.getString("name").toLowerCase().equals(teamName.toLowerCase()) ){
                 teamId = item.getString("id");
                 break;
             }
