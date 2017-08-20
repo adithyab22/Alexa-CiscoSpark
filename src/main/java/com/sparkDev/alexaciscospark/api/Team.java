@@ -24,6 +24,7 @@ public class Team {
         }
     }
 
+
     //DELETE http request to delete a team on Cisco Spark
     public static String deleteTeam(String teamName, String sessionToken) throws UnirestException {
         HttpResponse<JsonNode> teamsResponse = Unirest.get("https://api.ciscospark.com/v1/teams")

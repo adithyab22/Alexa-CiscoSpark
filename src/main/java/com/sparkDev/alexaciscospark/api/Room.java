@@ -63,14 +63,14 @@ public class Room {
 
     //DELETE http request to delete a room on Cisco Spark
     public static String deleteRoom(String roomName, String sessionToken) throws UnirestException {
-        HttpResponse<JsonNode> teamsResponse = Unirest.get("https://api.ciscospark.com/v1/rooms")
+        HttpResponse<JsonNode> roomsResponse = Unirest.get("https://api.ciscospark.com/v1/rooms")
                 .header("authorization", "Bearer " + sessionToken)
                 .header("cache-control", "no-cache")
                 .header("postman-token", "2a79d2f7-e472-5985-9f05-a315bcb50974")
                 .asJson();
 
-        JSONObject teams = teamsResponse.getBody().getObject();
-        JSONArray items = (JSONArray) teams.get("items");
+        JSONObject rooms = roomsResponse.getBody().getObject();
+        JSONArray items = (JSONArray) rooms.get("items");
         String roomId = null;
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);
@@ -98,3 +98,4 @@ public class Room {
         }
     }
 }
+
