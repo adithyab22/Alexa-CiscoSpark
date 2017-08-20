@@ -1,5 +1,7 @@
 package com.sparkDev.alexaciscospark.api;
 
+import com.amazon.speech.slu.Intent;
+import com.amazon.speech.slu.Slot;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
