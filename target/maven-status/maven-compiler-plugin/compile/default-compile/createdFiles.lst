@@ -27,7 +27,6 @@ com\amazon\speech\json\SpeechletRequestEnvelope$Builder.class
 com\amazon\speech\speechlet\Session$1.class
 com\amazon\speech\speechlet\SessionStartedRequest$1.class
 com\amazon\speech\speechlet\Speechlet.class
-com\sparkDev\alexaciscospark\HelloWorldSpeechlet.class
 com\amazon\speech\speechlet\SessionEndedRequest$1.class
 com\amazon\speech\slu\Slot.class
 com\amazon\speech\speechlet\verifier\SpeechletRequestVerifier.class
@@ -46,7 +45,6 @@ com\amazon\speech\speechlet\verifier\SpeechletResponseVerifier.class
 com\amazon\speech\speechlet\User$1.class
 com\amazon\speech\slu\Slot$Builder.class
 com\amazon\speech\ui\Image.class
-com\sparkDev\alexaciscospark\HelloWorldSpeechletRequestStreamHandler.class
 com\amazon\speech\speechlet\authentication\ApplicationIdVerifier.class
 com\amazon\speech\speechlet\IntentRequest.class
 com\amazon\speech\speechlet\authentication\TimestampVerifier.class
