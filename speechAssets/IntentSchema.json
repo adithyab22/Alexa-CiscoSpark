@@ -1,0 +1,112 @@
+{
+  "intents": [
+    {
+      "slots": [
+        {
+          "name": "TeamName",
+          "type": "TEAMNAME"
+        }
+      ],
+      "intent": "createTeamIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "InputText",
+          "type": "CUSTOMSTRING"
+        }
+      ],
+      "intent": "dialogueIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "RoomTitle",
+          "type": "ROOMTITLE"
+        },
+        {
+          "name": "TeamName",
+          "type": "TEAMNAME"
+        }
+      ],
+      "intent": "createRoomIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "RoomTitle",
+          "type": "ROOMTITLE"
+        },
+        {
+          "name": "message",
+          "type": "MESSAGE"
+        }
+      ],
+      "intent": "sendMessageToRoom"
+    },
+    {
+      "slots": [
+        {
+          "name": "memberName",
+          "type": "AMAZON.Person"
+        },
+        {
+          "name": "message",
+          "type": "MESSAGE"
+        }
+      ],
+      "intent": "sendMessageToMember"
+    },
+    {
+      "slots": [
+        {
+          "name": "memberName",
+          "type": "AMAZON.Person"
+        },
+        {
+          "name": "TeamName",
+          "type": "TEAMNAME"
+        }
+      ],
+      "intent": "addMemberToTeamIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "memberName",
+          "type": "AMAZON.Person"
+        },
+        {
+          "name": "RoomTitle",
+          "type": "ROOMTITLE"
+        }
+      ],
+      "intent": "addMemberToRoomIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "memberEmail",
+          "type": "AMAZON.LITERAL"
+        },
+        {
+          "name": "TeamName",
+          "type": "TEAMNAME"
+        }
+      ],
+      "intent": "addMemberEmailToTeamIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    },
+    {
+      "intent": "AMAZON.RepeatIntent"
+    }
+  ]
+}
