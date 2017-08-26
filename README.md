@@ -1,3 +1,6 @@
+
+[![Build Status](https://travis-ci.org/adithyab22/Alexa-CiscoSpark.svg?branch=master)](https://travis-ci.org/adithyab22/Alexa-CiscoSpark)
+
 # Amazon Alexa-Cisco Spark
 This is an amazon alexa skill which leverages voice experience of Amazon Alexa to perform actions on Cisco Spark.
 Using this skill, you can register users, add contacts, create teams, send messages to contacts/teams and so on - all these - just using voice. 
