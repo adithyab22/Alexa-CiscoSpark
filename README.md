@@ -1,23 +1,24 @@
 # Amazon Alexa-Cisco Spark
-This is an amazon alexa skill which integrates voice experience of Amazon Alexa to Cisco Spark. 
+This is an amazon alexa skill which leverages voice experience of Amazon Alexa to perform actions on Cisco Spark.
+Using this skill, you can register users, add contacts, create teams, send messages to contacts/teams and so on - all these - just using voice. 
 
 # Usage  
 
-## Things this skill can do
-* Create Team
-* Create Room
-* Add member to team
-* Add member to room
-* Send message to team/room/person
+*Once installed, this skill requires linking account with Cisco Spark.
 
 ## Sample utterances
+The invocation name for this skill is "Sparky"
+Just say: "Alexa, Ask Sparky to send message to John Doe"
+
+These are a few things you can ask Sparky to do:
+
 * Create team [Teamname]
 * Create room [Roomname]
 * Send message to [Person|Roomname|Teamname]
 * Add member to [Teamname|Roomname]
 
 ## How it works?
-1) When we command to Alexa, it triggers the Alexa to send the command with the invocation name Sparky.
-2) Alexa skills calls a web service running on AWS Lambda.
-3) Lambda web service send API requests are sent to cisco Spark server.
-4) Based on API response, Lambda returns the speech output to Alexa.
+1) Alexa uses invocation name "Sparky" to invoke this skill. 
+2) Skill calls a web service running on AWS Lambda.
+3) Lambda web service requests Cisco Spark API to perform the command.
+4) Based on API response, Lambda returns the speech output to user.
