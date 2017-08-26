@@ -1,0 +1,18 @@
+createTeamIntent to create a team
+createTeamIntent to create a team with name {TeamName}
+dialogueIntent the team name is {InputText}
+dialogueIntent the room name is {InputText}
+dialogueIntent the message is {InputText}
+createRoomIntent create a room
+createRoomIntent create a room {RoomTitle}
+createRoomIntent create a room {RoomTitle} inside {TeamName}
+createRoomIntent create a room {RoomTitle} in {TeamName}
+sendMessageToRoom to post message to room {RoomTitle}
+sendMessageToRoom to post message {message} to room {RoomTitle}
+sendMessageToMember to send message to {memberName}
+sendMessageToMember to send message {message} to {memberName}
+addMemberToTeamIntent to include {memberName}
+addMemberToTeamIntent to include {memberName} to team
+addMemberToTeamIntent to include {memberName} to team {TeamName}
+addMemberToRoomIntent to add {memberName} to room
+addMemberToRoomIntent to add {memberName} to room {RoomTitle}
